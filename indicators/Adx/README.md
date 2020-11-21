@@ -37,7 +37,7 @@ The first `2×N-1` periods will have `null` values for ADX since there's not eno
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // calculate 14-period ADX
 IEnumerable<AdxResult> results = Indicator.GetAdx(history,14);

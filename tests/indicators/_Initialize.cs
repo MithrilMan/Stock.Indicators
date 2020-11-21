@@ -10,8 +10,8 @@ namespace Internal.Tests
     {
         internal static readonly CultureInfo englishCulture = new CultureInfo("en-US", false);
 
-        internal static readonly IEnumerable<Quote> history = History.GetHistory();
-        internal static readonly IEnumerable<Quote> historyOther = History.GetHistoryOther();
-        internal static readonly IEnumerable<Quote> historyBad = History.GetHistoryBad();
+        internal static readonly IEnumerable<IQuote> history = History.GetHistory();
+        internal static readonly IEnumerable<IQuote> historyOther = History.GetHistoryOther();
+        internal static readonly IEnumerable<IQuote> historyBad = History.GetHistoryBad();
     }
 }

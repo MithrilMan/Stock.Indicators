@@ -11,9 +11,9 @@ namespace Internal.Tests
     {
         // note: declarations in primary History file
 
-        internal static IEnumerable<Quote> GetHistoryLong(int days = 5285)
+        internal static IEnumerable<IQuote> GetHistoryLong(int days = 5285)
         {
-            List<Quote> h = new List<Quote> {
+            List<IQuote> h = new List<IQuote> {
             new Quote { Date = DateTime.ParseExact("1999-09-07","yyyy-MM-dd",englishCulture), Open=1357.24m, High=1361.39m, Low=1349.59m, Close=1350.45m, Volume = 715300000 },
             new Quote { Date = DateTime.ParseExact("1999-09-08","yyyy-MM-dd",englishCulture), Open=1350.45m, High=1355.18m, Low=1337.36m, Close=1344.15m, Volume = 791200000 },
             new Quote { Date = DateTime.ParseExact("1999-09-09","yyyy-MM-dd",englishCulture), Open=1344.15m, High=1347.66m, Low=1333.91m, Close=1347.66m, Volume = 773900000 },

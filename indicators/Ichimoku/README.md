@@ -41,7 +41,7 @@ The first `N-1`, `S-1`, and `L-1` periods will have various `null` values since 
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("MSFT");
+IEnumerable<IQuote> history = GetHistoryFromFeed("MSFT");
 
 // calculate ICHIMOKU(9,26,52)
 IEnumerable<IchimokuResult> results = Indicator.GetIchimoku(history,9,26,52);

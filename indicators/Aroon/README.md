@@ -37,7 +37,7 @@ The first `N-1` periods will have `null` Aroon values since there's not enough d
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // calculate Aroon(25)
 IEnumerable<AroonResult> results = Indicator.GetAroon(history,25);

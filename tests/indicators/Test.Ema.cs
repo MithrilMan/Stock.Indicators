@@ -55,7 +55,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Insufficient history for N+100.")]
         public void InsufficientHistoryA()
         {
-            IEnumerable<Quote> h = History.GetHistory(129);
+            IEnumerable<IQuote> h = History.GetHistory(129);
             Indicator.GetEma(h, 30);
         }
 
@@ -63,7 +63,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Insufficient history for 2×N.")]
         public void InsufficientHistoryB()
         {
-            IEnumerable<Quote> h = History.GetHistory(499);
+            IEnumerable<IQuote> h = History.GetHistory(499);
             Indicator.GetEma(h, 250);
         }
 

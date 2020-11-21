@@ -73,7 +73,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Insufficient history for N+1.")]
         public void InsufficientHistoryA()
         {
-            IEnumerable<Quote> h = History.GetHistory(14);
+            IEnumerable<IQuote> h = History.GetHistory(14);
             Indicator.GetMfi(h, 14);
         }
 

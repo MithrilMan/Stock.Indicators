@@ -68,8 +68,8 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Insufficient history.")]
         public void InsufficientHistory()
         {
-            IEnumerable<Quote> h1 = History.GetHistory(29);
-            IEnumerable<Quote> h2 = History.GetHistoryOther(29);
+            IEnumerable<IQuote> h1 = History.GetHistory(29);
+            IEnumerable<IQuote> h2 = History.GetHistoryOther(29);
             Indicator.GetBeta(h1, h2, 30);
         }
 
@@ -77,7 +77,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Not enought Eval history.")]
         public void InsufficientEvalHistory()
         {
-            IEnumerable<Quote> h = History.GetHistoryOther(300);
+            IEnumerable<IQuote> h = History.GetHistoryOther(300);
             Indicator.GetBeta(history, h, 30);
         }
 

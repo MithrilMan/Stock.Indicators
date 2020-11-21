@@ -7,7 +7,7 @@ namespace Skender.Stock.Indicators
     public static partial class Indicator
     {
         // STOCHASTIC RSI
-        public static IEnumerable<StochRsiResult> GetStochRsi(IEnumerable<Quote> history,
+        public static IEnumerable<StochRsiResult> GetStochRsi(IEnumerable<IQuote> history,
             int rsiPeriod, int stochPeriod, int signalPeriod, int smoothPeriod = 1)
         {
 
@@ -21,7 +21,7 @@ namespace Skender.Stock.Indicators
             List<RsiResult> rsiResults = GetRsi(history, rsiPeriod).ToList();
 
             // convert rsi to quote format
-            List<Quote> rsiQuotes = rsiResults
+            List<IQuote> rsiQuotes = rsiResults
                 .Where(x => x.Rsi != null)
                 .Select(x => new Quote
                 {
@@ -30,7 +30,7 @@ namespace Skender.Stock.Indicators
                     Low = (decimal)x.Rsi,
                     Close = (decimal)x.Rsi
                 })
-                .ToList();
+                .ToList<IQuote>();
 
             // get Stochastic of RSI
             List<StochResult> stoResults = GetStoch(rsiQuotes, stochPeriod, signalPeriod, smoothPeriod).ToList();
@@ -61,7 +61,7 @@ namespace Skender.Stock.Indicators
         }
 
 
-        private static void ValidateStochRsi(IEnumerable<Quote> history,
+        private static void ValidateStochRsi(IEnumerable<IQuote> history,
             int rsiPeriod, int stochPeriod, int signalPeriod, int smoothPeriod)
         {
 

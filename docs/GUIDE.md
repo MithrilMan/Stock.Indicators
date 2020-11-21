@@ -11,7 +11,7 @@
 
 ## Prerequisite data
 
-Most indicators require that you provide historical quote data and additional configuration parameters.
+Most indicators require that you provide historical IQuote data and additional configuration parameters.
 
 You can get historical quotes from your favorite stock data provider.
 Historical data is an `IEnumerable` of the `Quote` class ([see below](#quote)).
@@ -21,7 +21,7 @@ You can, of course, override these and provide your own values.
 
 ## Example usage
 
-All indicator methods will produce all possible results for the provided history -- it is not just a single data point returned.  For example, if you provide 3 years worth of quote history for the SMA method, you'll get 3 years of SMA result values.
+All indicator methods will produce all possible results for the provided history -- it is not just a single data point returned.  For example, if you provide 3 years worth of IQuote history for the SMA method, you'll get 3 years of SMA result values.
 
 ```csharp
 using Skender.Stock.Indicators;
@@ -29,7 +29,7 @@ using Skender.Stock.Indicators;
 [..]
 
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("MSFT");
+IEnumerable<IQuote> history = GetHistoryFromFeed("MSFT");
 
 // calculate 20-period SMA
 IEnumerable<SmaResult> results = Indicator.GetSma(history,20);
@@ -59,13 +59,13 @@ Historical quotes should be of consistent time frequency (e.g. per minute, hour,
 | `Close` | decimal | Close price
 | `Volume` | decimal | Volume
 
-### Where can I get historical quote data?
+### Where can I get historical IQuote data?
 
 There are many places to get stock market data.  Check with your brokerage or other commercial sites.  If you're looking for a free developer API, try [TwelveData](https://twelvedata.com) or [Alpha Vantage](https://www.alphavantage.co).
 
-### How much historical quote data do I need?
+### How much historical IQuote data do I need?
 
-Each indicator will need different amounts to calculate.  You can find guidance on the individual indicator documentation pages for minimum requirements; however, most use cases will require that you provide more than the minimum.  As a general rule of thumb, you will be safe if you provide 750 points of historical quote data (e.g. 3 years of daily data).  A `BadHistoryException` will be thrown if you do not provide enough history.
+Each indicator will need different amounts to calculate.  You can find guidance on the individual indicator documentation pages for minimum requirements; however, most use cases will require that you provide more than the minimum.  As a general rule of thumb, you will be safe if you provide 750 points of historical IQuote data (e.g. 3 years of daily data).  A `BadHistoryException` will be thrown if you do not provide enough history.
 
 Note that some indicators, especially those that are derived from [Exponential Moving Average](../indicators/Ema/README.md), use a smoothing technique where there is convergence over time.  While you can calculate these with the minimum amount of data, the precision to two decimal points often requires 250 or more preceding historical records.
 
@@ -73,14 +73,14 @@ For example, if you are using daily data and want one year of precise EMA(250) d
 
 ## Validating history
 
-Historical quotes are automatically re-sorted [ascending by date] on every call to the library.  This is needed to ensure that it is sequenced properly.  If you want a more advanced check of your `IEnumerable<Quote> history` (historical quotes) you can validate it with the `ValidateHistory` helper function.  It will check for duplicate dates and other bad data.  This comes at a small performance cost, so we did not automatically add these advanced validations in the indicator methods.  Of course, you can and should do your own validation of `history` prior to using it in this library.  Bad historical quotes data can produce unexpected results.
+Historical quotes are automatically re-sorted [ascending by date] on every call to the library.  This is needed to ensure that it is sequenced properly.  If you want a more advanced check of your `IEnumerable<IQuote> history` (historical quotes) you can validate it with the `ValidateHistory` helper function.  It will check for duplicate dates and other bad data.  This comes at a small performance cost, so we did not automatically add these advanced validations in the indicator methods.  Of course, you can and should do your own validation of `history` prior to using it in this library.  Bad historical quotes data can produce unexpected results.
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // advanced cleaning
-List<Quote> validatedHistory = Cleaners.ValidateHistory(history);
+List<IQuote> validatedHistory = Cleaners.ValidateHistory(history);
 ```
 
 ## Using derived classes
@@ -97,7 +97,7 @@ public class MyEma : EmaResult
 public void MyClass(){
 
   // fetch historical quotes from your favorite feed, in Quote format
-  IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+  IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
   // compute indicator
   INumerable<EmaResult> emaResults = Indicator.GetEma(history,14);
@@ -115,7 +115,7 @@ public void MyClass(){
   // randomly selecting first record from the collection here for the example
   MyEma r = myEmaResults.FirstOrDefault();
 
-  // use your custom quote data
+  // use your custom IQuote data
   Console.WriteLine("On {0}, EMA was {1} for my EMA ID {2}.",
                      r.Date, r.Ema, r.MyId);
 }
@@ -123,17 +123,17 @@ public void MyClass(){
 
 ## Generating indicator of indicators
 
-If you want to compute an indicator of indicators, such as an SMA of an ADX or an [RSI of an OBV](https://medium.com/@robswc/this-is-what-happens-when-you-combine-the-obv-and-rsi-indicators-6616d991773d), all you need to do is to take the results of one, reformat into a synthetic quote history, and send it through to another indicator.  Example:
+If you want to compute an indicator of indicators, such as an SMA of an ADX or an [RSI of an OBV](https://medium.com/@robswc/this-is-what-happens-when-you-combine-the-obv-and-rsi-indicators-6616d991773d), all you need to do is to take the results of one, reformat into a synthetic IQuote history, and send it through to another indicator.  Example:
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // calculate OBV
 IEnumerable<ObvResult> obvResults = Indicator.GetObv(history);
 
 // convert to synthetic history [using LINQ]
-List<Quote> obvHistory = obvResults
+List<IQuote> obvHistory = obvResults
   .Where(x => x.Obv != null)
   .Select(x => new Quote
     {

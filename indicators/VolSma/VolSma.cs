@@ -7,7 +7,7 @@ namespace Skender.Stock.Indicators
     public static partial class Indicator
     {
         // SIMPLE MOVING AVERAGE of VOLUME
-        public static IEnumerable<VolSmaResult> GetVolSma(IEnumerable<Quote> history, int lookbackPeriod)
+        public static IEnumerable<VolSmaResult> GetVolSma(IEnumerable<IQuote> history, int lookbackPeriod)
         {
 
             // clean quotes and initialize results
@@ -42,7 +42,7 @@ namespace Skender.Stock.Indicators
         }
 
 
-        private static void ValidateVolSma(IEnumerable<Quote> history, int lookbackPeriod)
+        private static void ValidateVolSma(IEnumerable<IQuote> history, int lookbackPeriod)
         {
 
             // check parameters

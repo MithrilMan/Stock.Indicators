@@ -37,7 +37,7 @@ The first `L-1` periods will have `null` Ultimate values since there's not enoug
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("MSFT");
+IEnumerable<IQuote> history = GetHistoryFromFeed("MSFT");
 
 // calculate 20-period Ultimate
 IEnumerable<UltimateResult> results = Indicator.GetUltimate(history,7,14,28);

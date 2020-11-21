@@ -7,11 +7,11 @@ namespace Skender.Stock.Indicators
     public static partial class Indicator
     {
         // CHAIKIN MONEY FLOW
-        public static IEnumerable<CmfResult> GetCmf(IEnumerable<Quote> history, int lookbackPeriod = 20)
+        public static IEnumerable<CmfResult> GetCmf(IEnumerable<IQuote> history, int lookbackPeriod = 20)
         {
 
             // clean quotes
-            List<Quote> historyList = history.Sort();
+            List<IQuote> historyList = history.Sort();
 
             // check parameters
             ValidateCmf(history, lookbackPeriod);
@@ -40,7 +40,7 @@ namespace Skender.Stock.Indicators
 
                     for (int p = index - lookbackPeriod; p < index; p++)
                     {
-                        Quote h = historyList[p];
+                        IQuote h = historyList[p];
                         sumVol += h.Volume;
 
                         AdlResult d = adlResults[p];
@@ -63,7 +63,7 @@ namespace Skender.Stock.Indicators
         }
 
 
-        private static void ValidateCmf(IEnumerable<Quote> history, int lookbackPeriod)
+        private static void ValidateCmf(IEnumerable<IQuote> history, int lookbackPeriod)
         {
 
             // check parameters

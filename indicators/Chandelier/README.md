@@ -44,7 +44,7 @@ The first `N` periods will have `null` Chandelier values since there's not enoug
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // calculate Chandelier(22,3,LONG)
 IEnumerable<ChandelierResult> results = Indicator.GetChandelier(history,22,3,ChandelierType.Long);

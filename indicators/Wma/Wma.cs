@@ -7,11 +7,11 @@ namespace Skender.Stock.Indicators
     public static partial class Indicator
     {
         // WEIGHTED MOVING AVERAGE
-        public static IEnumerable<WmaResult> GetWma(IEnumerable<Quote> history, int lookbackPeriod)
+        public static IEnumerable<WmaResult> GetWma(IEnumerable<IQuote> history, int lookbackPeriod)
         {
 
             // clean quotes
-            List<Quote> historyList = history.Sort();
+            List<IQuote> historyList = history.Sort();
 
             // check parameters
             ValidateWma(history, lookbackPeriod);
@@ -23,7 +23,7 @@ namespace Skender.Stock.Indicators
             // roll through history
             for (int i = 0; i < historyList.Count; i++)
             {
-                Quote h = historyList[i];
+                IQuote h = historyList[i];
                 int index = i + 1;
 
                 WmaResult result = new WmaResult
@@ -36,7 +36,7 @@ namespace Skender.Stock.Indicators
                     decimal wma = 0;
                     for (int p = index - lookbackPeriod; p < index; p++)
                     {
-                        Quote d = historyList[p];
+                        IQuote d = historyList[p];
                         wma += d.Close * (lookbackPeriod - (decimal)(index - p - 1)) / divisor;
                     }
 
@@ -50,7 +50,7 @@ namespace Skender.Stock.Indicators
         }
 
 
-        private static void ValidateWma(IEnumerable<Quote> history, int lookbackPeriod)
+        private static void ValidateWma(IEnumerable<IQuote> history, int lookbackPeriod)
         {
 
             // check parameters

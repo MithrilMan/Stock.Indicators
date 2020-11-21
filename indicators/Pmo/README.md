@@ -38,7 +38,7 @@ The first `T+S-1` periods will have `null` values for PMO since there's not enou
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // calculate 20-period PMO
 IEnumerable<PmoResult> results = Indicator.GetPmo(history,35,20,10);

@@ -36,7 +36,7 @@ The first `N-1` periods will have `null` values for `VolSma` since there's not e
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("MSFT");
+IEnumerable<IQuote> history = GetHistoryFromFeed("MSFT");
 
 // calculate 20-period SMA of Volume
 IEnumerable<VolSmaResult> results = Indicator.GetVolSma(history,20);

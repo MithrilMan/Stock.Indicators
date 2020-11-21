@@ -8,11 +8,11 @@ namespace Skender.Stock.Indicators
     {
         // DONCHIAN CHANNEL
         public static IEnumerable<KeltnerResult> GetKeltner(
-            IEnumerable<Quote> history, int emaPeriod = 20, decimal multiplier = 2, int atrPeriod = 10)
+            IEnumerable<IQuote> history, int emaPeriod = 20, decimal multiplier = 2, int atrPeriod = 10)
         {
 
             // clean quotes
-            List<Quote> historyList = history.Sort();
+            List<IQuote> historyList = history.Sort();
 
             // validate parameters
             ValidateKeltner(history, emaPeriod, multiplier, atrPeriod);
@@ -26,7 +26,7 @@ namespace Skender.Stock.Indicators
             // roll through history
             for (int i = 0; i < historyList.Count; i++)
             {
-                Quote h = historyList[i];
+                IQuote h = historyList[i];
                 int index = i + 1;
 
                 KeltnerResult result = new KeltnerResult
@@ -54,7 +54,7 @@ namespace Skender.Stock.Indicators
 
 
         private static void ValidateKeltner(
-            IEnumerable<Quote> history, int emaPeriod, decimal multiplier, int atrPeriod)
+            IEnumerable<IQuote> history, int emaPeriod, decimal multiplier, int atrPeriod)
         {
 
             // check parameters

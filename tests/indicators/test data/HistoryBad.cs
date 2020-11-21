@@ -11,10 +11,10 @@ namespace Internal.Tests
     {
         // note: declarations in primary History file
 
-        internal static IEnumerable<Quote> GetHistoryBad(int days = 502)
+        internal static IEnumerable<IQuote> GetHistoryBad(int days = 502)
         {
             // includes normal, tiny, huge, flatline, all zeros, nulls, missing dates
-            List<Quote> h = new List<Quote> {
+            List<IQuote> h = new List<IQuote> {
             new Quote { Date = DateTime.ParseExact("2017-01-03","yyyy-MM-dd",englishCulture), Open=212.61m, High=213.35m, Low=211.52m, Close=212.8m, Volume = 96708880 },
             new Quote { Date = DateTime.ParseExact("2017-01-04","yyyy-MM-dd",englishCulture), Open=213.16m, High=214.22m, Low=213.15m, Close=214.06m, Volume = 83348752 },
             new Quote { Date = DateTime.ParseExact("2017-01-05","yyyy-MM-dd",englishCulture), Open=213.77m, High=214.06m, Low=213.02m, Close=213.89m, Volume = 82961968 },

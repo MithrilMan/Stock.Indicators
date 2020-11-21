@@ -7,11 +7,11 @@ namespace Skender.Stock.Indicators
     public static partial class Indicator
     {
         // AROON OSCILLATOR
-        public static IEnumerable<AroonResult> GetAroon(IEnumerable<Quote> history, int lookbackPeriod = 25)
+        public static IEnumerable<AroonResult> GetAroon(IEnumerable<IQuote> history, int lookbackPeriod = 25)
         {
 
             // clean quotes
-            List<Quote> historyList = history.Sort();
+            List<IQuote> historyList = history.Sort();
 
             // validate parameters
             ValidateAroon(history, lookbackPeriod);
@@ -22,7 +22,7 @@ namespace Skender.Stock.Indicators
             // roll through history
             for (int i = 0; i < historyList.Count; i++)
             {
-                Quote h = historyList[i];
+                IQuote h = historyList[i];
                 int index = i + 1;
 
                 AroonResult result = new AroonResult
@@ -40,7 +40,7 @@ namespace Skender.Stock.Indicators
 
                     for (int p = index - lookbackPeriod - 1; p < index; p++)
                     {
-                        Quote d = historyList[p];
+                        IQuote d = historyList[p];
 
                         if (d.High > lastHighPrice)
                         {
@@ -67,7 +67,7 @@ namespace Skender.Stock.Indicators
         }
 
 
-        private static void ValidateAroon(IEnumerable<Quote> history, int lookbackPeriod)
+        private static void ValidateAroon(IEnumerable<IQuote> history, int lookbackPeriod)
         {
             // check parameters
             if (lookbackPeriod <= 0)

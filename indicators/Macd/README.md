@@ -39,7 +39,7 @@ The first `S-1` slow periods + signal period will have `null` values since there
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // calculate MACD(12,26,9)
 IEnumerable<MacdResult> results = Indicator.GetMacd(history,12,26,9);

@@ -41,7 +41,7 @@ The first period OBV will have `0` value since there's not enough data to calcul
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // calculate
 IEnumerable<ObvResult> results = Indicator.GetObv(history);

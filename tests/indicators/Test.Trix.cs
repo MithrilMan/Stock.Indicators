@@ -62,7 +62,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Insufficient history for 3*N+100.")]
         public void InsufficientHistoryA()
         {
-            IEnumerable<Quote> h = History.GetHistory(189);
+            IEnumerable<IQuote> h = History.GetHistory(189);
             Indicator.GetTrix(h, 30);
         }
 
@@ -70,7 +70,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Insufficient history for 4×N.")]
         public void InsufficientHistoryB()
         {
-            IEnumerable<Quote> historyLong = History.GetHistoryLong(999);
+            IEnumerable<IQuote> historyLong = History.GetHistoryLong(999);
             Indicator.GetTrix(historyLong, 250);
         }
     }

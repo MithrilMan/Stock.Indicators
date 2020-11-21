@@ -83,7 +83,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Insufficient history.")]
         public void InsufficientHistory()
         {
-            IEnumerable<Quote> h = History.GetHistory(51);
+            IEnumerable<IQuote> h = History.GetHistory(51);
             Indicator.GetIchimoku(h, 9, 26, 52);
         }
     }

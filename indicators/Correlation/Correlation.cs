@@ -8,11 +8,11 @@ namespace Skender.Stock.Indicators
     {
         // CORRELATION COEFFICIENT
         public static IEnumerable<CorrResult> GetCorrelation(
-            IEnumerable<Quote> historyA, IEnumerable<Quote> historyB, int lookbackPeriod)
+            IEnumerable<IQuote> historyA, IEnumerable<IQuote> historyB, int lookbackPeriod)
         {
             // clean quotes
-            List<Quote> historyListA = historyA.Sort();
-            List<Quote> historyListB = historyB.Sort();
+            List<IQuote> historyListA = historyA.Sort();
+            List<IQuote> historyListB = historyB.Sort();
 
             // validate parameters
             ValidateCorrelation(historyA, historyB, lookbackPeriod);
@@ -24,8 +24,8 @@ namespace Skender.Stock.Indicators
             // roll through history for interim data
             for (int i = 0; i < historyListA.Count; i++)
             {
-                Quote a = historyListA[i];
-                Quote b = historyListB[i];
+                IQuote a = historyListA[i];
+                IQuote b = historyListB[i];
                 int index = i + 1;
 
                 if (a.Date != b.Date)
@@ -50,8 +50,8 @@ namespace Skender.Stock.Indicators
 
                     for (int p = index - lookbackPeriod; p < index; p++)
                     {
-                        Quote qa = historyListA[p];
-                        Quote qb = historyListB[p];
+                        IQuote qa = historyListA[p];
+                        IQuote qb = historyListB[p];
 
                         sumPriceA += qa.Close;
                         sumPriceB += qb.Close;
@@ -83,7 +83,7 @@ namespace Skender.Stock.Indicators
         }
 
 
-        private static void ValidateCorrelation(IEnumerable<Quote> historyA, IEnumerable<Quote> historyB, int lookbackPeriod)
+        private static void ValidateCorrelation(IEnumerable<IQuote> historyA, IEnumerable<IQuote> historyB, int lookbackPeriod)
         {
 
             // check parameters

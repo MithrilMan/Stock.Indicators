@@ -37,7 +37,7 @@ The first `N-1` periods will have `null` values for ATR since there's not enough
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // calculate 14-period ATR
 IEnumerable<AtrResult> results = Indicator.GetAtr(history,14);

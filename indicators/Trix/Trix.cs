@@ -8,7 +8,7 @@ namespace Skender.Stock.Indicators
     {
         // TRIPLE EMA OSCILLATOR (TRIX)
         public static IEnumerable<TrixResult> GetTrix(
-            IEnumerable<Quote> history, int lookbackPeriod, int? signalPeriod = null)
+            IEnumerable<IQuote> history, int lookbackPeriod, int? signalPeriod = null)
         {
 
             // convert history to basic format

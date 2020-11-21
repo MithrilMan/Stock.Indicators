@@ -8,11 +8,11 @@ namespace Skender.Stock.Indicators
     {
         // BOLLINGER BANDS
         public static IEnumerable<BollingerBandsResult> GetBollingerBands(
-            IEnumerable<Quote> history, int lookbackPeriod = 20, decimal standardDeviations = 2)
+            IEnumerable<IQuote> history, int lookbackPeriod = 20, decimal standardDeviations = 2)
         {
 
             // clean quotes
-            List<Quote> historyList = history.Sort();
+            List<IQuote> historyList = history.Sort();
 
             // validate parameters
             ValidateBollingerBands(history, lookbackPeriod, standardDeviations);
@@ -23,7 +23,7 @@ namespace Skender.Stock.Indicators
             // roll through history
             for (int i = 0; i < historyList.Count; i++)
             {
-                Quote h = historyList[i];
+                IQuote h = historyList[i];
                 int index = i + 1;
 
                 BollingerBandsResult r = new BollingerBandsResult
@@ -39,7 +39,7 @@ namespace Skender.Stock.Indicators
 
                     for (int p = index - lookbackPeriod; p < index; p++)
                     {
-                        Quote d = historyList[p];
+                        IQuote d = historyList[p];
                         periodClose[n] = (double)d.Close;
                         sum += d.Close;
                         n++;
@@ -67,7 +67,7 @@ namespace Skender.Stock.Indicators
 
 
         private static void ValidateBollingerBands(
-            IEnumerable<Quote> history, int lookbackPeriod, decimal standardDeviations)
+            IEnumerable<IQuote> history, int lookbackPeriod, decimal standardDeviations)
         {
 
             // check parameters

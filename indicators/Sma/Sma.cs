@@ -8,11 +8,11 @@ namespace Skender.Stock.Indicators
     {
         // SIMPLE MOVING AVERAGE
         public static IEnumerable<SmaResult> GetSma(
-            IEnumerable<Quote> history, int lookbackPeriod, bool extended = false)
+            IEnumerable<IQuote> history, int lookbackPeriod, bool extended = false)
         {
 
             // clean quotes
-            List<Quote> historyList = history.Sort();
+            List<IQuote> historyList = history.Sort();
 
             // check parameters
             ValidateSma(history, lookbackPeriod);
@@ -23,7 +23,7 @@ namespace Skender.Stock.Indicators
             // roll through history
             for (int i = 0; i < historyList.Count; i++)
             {
-                Quote h = historyList[i];
+                IQuote h = historyList[i];
                 int index = i + 1;
 
                 SmaResult result = new SmaResult
@@ -36,7 +36,7 @@ namespace Skender.Stock.Indicators
                     decimal sumSma = 0m;
                     for (int p = index - lookbackPeriod; p < index; p++)
                     {
-                        Quote d = historyList[p];
+                        IQuote d = historyList[p];
                         sumSma += d.Close;
                     }
 
@@ -51,7 +51,7 @@ namespace Skender.Stock.Indicators
 
                         for (int p = index - lookbackPeriod; p < index; p++)
                         {
-                            Quote d = historyList[p];
+                            IQuote d = historyList[p];
                             sumMad += Math.Abs(d.Close - (decimal)result.Sma);
                             sumMse += (d.Close - (decimal)result.Sma) * (d.Close - (decimal)result.Sma);
 
@@ -77,7 +77,7 @@ namespace Skender.Stock.Indicators
         }
 
 
-        private static void ValidateSma(IEnumerable<Quote> history, int lookbackPeriod)
+        private static void ValidateSma(IEnumerable<IQuote> history, int lookbackPeriod)
         {
 
             // check parameters

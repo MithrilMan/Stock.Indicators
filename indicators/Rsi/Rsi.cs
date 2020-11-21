@@ -6,7 +6,7 @@ namespace Skender.Stock.Indicators
     public static partial class Indicator
     {
         // RELATIVE STRENGTH INDEX
-        public static IEnumerable<RsiResult> GetRsi(IEnumerable<Quote> history, int lookbackPeriod = 14)
+        public static IEnumerable<RsiResult> GetRsi(IEnumerable<IQuote> history, int lookbackPeriod = 14)
         {
 
             // convert history to basic format

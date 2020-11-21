@@ -7,11 +7,11 @@ namespace Skender.Stock.Indicators
     public static partial class Indicator
     {
         // AVERAGE TRUE RANGE
-        public static IEnumerable<AtrResult> GetAtr(IEnumerable<Quote> history, int lookbackPeriod = 14)
+        public static IEnumerable<AtrResult> GetAtr(IEnumerable<IQuote> history, int lookbackPeriod = 14)
         {
 
             // clean quotes
-            List<Quote> historyList = history.Sort();
+            List<IQuote> historyList = history.Sort();
 
             // validate parameters
             ValidateAtr(history, lookbackPeriod);
@@ -27,7 +27,7 @@ namespace Skender.Stock.Indicators
             // roll through history
             for (int i = 0; i < historyList.Count; i++)
             {
-                Quote h = historyList[i];
+                IQuote h = historyList[i];
                 int index = i + 1;
 
                 AtrResult result = new AtrResult
@@ -73,7 +73,7 @@ namespace Skender.Stock.Indicators
         }
 
 
-        private static void ValidateAtr(IEnumerable<Quote> history, int lookbackPeriod)
+        private static void ValidateAtr(IEnumerable<IQuote> history, int lookbackPeriod)
         {
             // check parameters
             if (lookbackPeriod <= 1)

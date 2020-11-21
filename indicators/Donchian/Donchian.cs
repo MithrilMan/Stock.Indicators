@@ -8,11 +8,11 @@ namespace Skender.Stock.Indicators
     {
         // DONCHIAN CHANNEL
         public static IEnumerable<DonchianResult> GetDonchian(
-            IEnumerable<Quote> history, int lookbackPeriod = 20)
+            IEnumerable<IQuote> history, int lookbackPeriod = 20)
         {
 
             // clean quotes
-            List<Quote> historyList = history.Sort();
+            List<IQuote> historyList = history.Sort();
 
             // validate parameters
             ValidateDonchian(history, lookbackPeriod);
@@ -23,7 +23,7 @@ namespace Skender.Stock.Indicators
             // roll through history
             for (int i = 0; i < historyList.Count; i++)
             {
-                Quote h = historyList[i];
+                IQuote h = historyList[i];
                 int index = i + 1;
 
                 DonchianResult result = new DonchianResult
@@ -38,7 +38,7 @@ namespace Skender.Stock.Indicators
 
                     for (int p = index - lookbackPeriod; p < index; p++)
                     {
-                        Quote d = historyList[p];
+                        IQuote d = historyList[p];
 
                         if (d.High > highHigh)
                         {
@@ -65,7 +65,7 @@ namespace Skender.Stock.Indicators
 
 
         private static void ValidateDonchian(
-            IEnumerable<Quote> history, int lookbackPeriod)
+            IEnumerable<IQuote> history, int lookbackPeriod)
         {
 
             // check parameters

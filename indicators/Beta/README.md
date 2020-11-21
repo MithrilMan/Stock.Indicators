@@ -36,8 +36,8 @@ The first `N-1` periods will have `null` values since there's not enough data to
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> historyTSLA = GetHistoryFromFeed("TSLA");
-IEnumerable<Quote> historySPX = GetHistoryFromFeed("SPX");
+IEnumerable<IQuote> historyTSLA = GetHistoryFromFeed("TSLA");
+IEnumerable<IQuote> historySPX = GetHistoryFromFeed("SPX");
 
 // calculate 20-period Beta coefficient
 IEnumerable<BetaResult> results = Indicator.GetBeta(historySPX,historyTSLA,20);

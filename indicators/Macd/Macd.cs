@@ -7,11 +7,11 @@ namespace Skender.Stock.Indicators
     public static partial class Indicator
     {
         // MOVING AVERAGE CONVERGENCE/DIVERGENCE (MACD) OSCILLATOR
-        public static IEnumerable<MacdResult> GetMacd(IEnumerable<Quote> history, int fastPeriod = 12, int slowPeriod = 26, int signalPeriod = 9)
+        public static IEnumerable<MacdResult> GetMacd(IEnumerable<IQuote> history, int fastPeriod = 12, int slowPeriod = 26, int signalPeriod = 9)
         {
 
             // clean quotes
-            List<Quote> historyList = history.Sort();
+            List<IQuote> historyList = history.Sort();
 
             // check parameters
             ValidateMacd(history, fastPeriod, slowPeriod, signalPeriod);
@@ -25,7 +25,7 @@ namespace Skender.Stock.Indicators
 
             for (int i = 0; i < historyList.Count; i++)
             {
-                Quote h = historyList[i];
+                IQuote h = historyList[i];
                 EmaResult df = emaFast[i];
                 EmaResult ds = emaSlow[i];
 
@@ -69,7 +69,7 @@ namespace Skender.Stock.Indicators
         }
 
 
-        private static void ValidateMacd(IEnumerable<Quote> history, int fastPeriod, int slowPeriod, int signalPeriod)
+        private static void ValidateMacd(IEnumerable<IQuote> history, int fastPeriod, int slowPeriod, int signalPeriod)
         {
 
             // check parameters

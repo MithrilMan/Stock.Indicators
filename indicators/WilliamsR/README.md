@@ -35,7 +35,7 @@ The first `N-1` periods will have `null` Oscillator values since there's not eno
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // calculate WilliamsR(14)
 IEnumerable<WilliamsResult> results = Indicator.GetWilliamsR(history,14);

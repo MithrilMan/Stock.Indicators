@@ -35,7 +35,7 @@ namespace Tests.Performance
     [MarkdownExporterAttribute.GitHub]
     public class MarkCleaners
     {
-        private static readonly IEnumerable<Quote> h = History.GetHistory();
+        private static readonly IEnumerable<IQuote> h = History.GetHistory();
 
         [Benchmark]
         public object SortHistory()

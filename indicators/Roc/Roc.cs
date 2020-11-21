@@ -8,11 +8,11 @@ namespace Skender.Stock.Indicators
     {
         // RATE OF CHANGE (ROC)
         public static IEnumerable<RocResult> GetRoc(
-            IEnumerable<Quote> history, int lookbackPeriod, int? smaPeriod = null)
+            IEnumerable<IQuote> history, int lookbackPeriod, int? smaPeriod = null)
         {
 
             // clean quotes
-            List<Quote> historyList = history.Sort();
+            List<IQuote> historyList = history.Sort();
 
             // check parameters
             ValidateRoc(history, lookbackPeriod, smaPeriod);
@@ -23,7 +23,7 @@ namespace Skender.Stock.Indicators
             // roll through history
             for (int i = 0; i < historyList.Count; i++)
             {
-                Quote h = historyList[i];
+                IQuote h = historyList[i];
                 int index = i + 1;
 
                 RocResult result = new RocResult
@@ -33,7 +33,7 @@ namespace Skender.Stock.Indicators
 
                 if (index > lookbackPeriod)
                 {
-                    Quote back = historyList[index - lookbackPeriod - 1];
+                    IQuote back = historyList[index - lookbackPeriod - 1];
 
                     result.Roc = (back.Close == 0) ? null
                         : 100 * (h.Close - back.Close) / back.Close;
@@ -58,7 +58,7 @@ namespace Skender.Stock.Indicators
         }
 
 
-        private static void ValidateRoc(IEnumerable<Quote> history, int lookbackPeriod, int? smaPeriod)
+        private static void ValidateRoc(IEnumerable<IQuote> history, int lookbackPeriod, int? smaPeriod)
         {
 
             // check parameters

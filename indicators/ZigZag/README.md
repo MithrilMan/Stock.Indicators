@@ -46,7 +46,7 @@ If you do not supply enough points to cover the percent change, there will be no
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // calculate 3% change ZIGZAG
 IEnumerable<ZigZagResult> results = Indicator.GetZigZag(history,ZigZagType.Close,3);

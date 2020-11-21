@@ -42,7 +42,7 @@ MAD, MSE, and MAPE values are only included if you set `extended` to `true`
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("MSFT");
+IEnumerable<IQuote> history = GetHistoryFromFeed("MSFT");
 
 // calculate 20-period SMA
 IEnumerable<SmaResult> results = Indicator.GetSma(history,20);

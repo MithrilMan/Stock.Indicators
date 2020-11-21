@@ -39,7 +39,7 @@ The first `N-1` periods will have `null` values for `Slope` since there's not en
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> historySPX = GetHistoryFromFeed("SPX");
+IEnumerable<IQuote> historySPX = GetHistoryFromFeed("SPX");
 
 // calculate 20-period Slope
 IEnumerable<SlopeResult> results = Indicator.GetSlope(history,20);

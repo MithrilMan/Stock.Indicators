@@ -60,7 +60,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Insufficient history for S+100.")]
         public void InsufficientHistory100()
         {
-            IEnumerable<Quote> h = History.GetHistory(109);
+            IEnumerable<IQuote> h = History.GetHistory(109);
             Indicator.GetChaikinOsc(h, 3, 10);
         }
 
@@ -68,7 +68,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Insufficient history for 2×S.")]
         public void InsufficientHistory250()
         {
-            IEnumerable<Quote> h = History.GetHistory(499);
+            IEnumerable<IQuote> h = History.GetHistory(499);
             Indicator.GetChaikinOsc(h, 3, 250);
         }
 

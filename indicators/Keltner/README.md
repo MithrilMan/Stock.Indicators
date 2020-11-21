@@ -42,7 +42,7 @@ The first `N-1` periods will have `null` values since there's not enough data to
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // calculate Keltner(20)
 IEnumerable<KeltnerResult> results = Indicator.GetKeltner(history,20,2.0,10);

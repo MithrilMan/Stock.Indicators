@@ -55,7 +55,7 @@ Triple EMA: The first `3×N-2` periods will have `null` values since there's not
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // calculate 20-period EMA
 IEnumerable<EmaResult> results = Indicator.GetEma(history,20);

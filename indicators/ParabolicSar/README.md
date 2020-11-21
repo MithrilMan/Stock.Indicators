@@ -39,7 +39,7 @@ The first trend will have `null` values since it is not accurate and based on an
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // calculate ParabolicSar(0.02,0.2)
 IEnumerable<ParabolicSarResult> results = Indicator.GetParabolicSar(history,0.02,0.2);

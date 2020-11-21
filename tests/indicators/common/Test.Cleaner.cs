@@ -13,10 +13,10 @@ namespace Internal.Tests
         [TestMethod()]
         public void ValidateHistoryTest()
         {
-            IEnumerable<Quote> history = History.GetHistory();
+            IEnumerable<IQuote> history = History.GetHistory();
 
             // clean
-            List<Quote> h = Cleaners.ValidateHistory(history);
+            List<IQuote> h = Cleaners.ValidateHistory(history);
 
             // assertions
 
@@ -36,9 +36,9 @@ namespace Internal.Tests
         [TestMethod()]
         public void ValidateLongHistoryTest()
         {
-            IEnumerable<Quote> historyLong = History.GetHistoryLong();
+            IEnumerable<IQuote> historyLong = History.GetHistoryLong();
 
-            List<Quote> h = Cleaners.ValidateHistory(historyLong);
+            List<IQuote> h = Cleaners.ValidateHistory(historyLong);
 
             // assertions
 
@@ -56,8 +56,8 @@ namespace Internal.Tests
         {
             // if history post-cleaning, is cut down in size it should not corrupt the results
 
-            IEnumerable<Quote> history = History.GetHistory(200);
-            List<Quote> h = Cleaners.ValidateHistory(history);
+            IEnumerable<IQuote> history = History.GetHistory(200);
+            List<IQuote> h = Cleaners.ValidateHistory(history);
 
             // assertions
 
@@ -95,10 +95,10 @@ namespace Internal.Tests
         [TestMethod()]
         public void SortHistoryTest()
         {
-            IEnumerable<Quote> history = History.GetHistory();
+            IEnumerable<IQuote> history = History.GetHistory();
 
             // clean
-            List<Quote> h = history.Sort();
+            List<IQuote> h = history.Sort();
 
             // assertions
 
@@ -155,7 +155,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "No historical quotes.")]
         public void NoHistory()
         {
-            List<Quote> badHistory = new List<Quote>();
+            List<IQuote> badHistory = new List<IQuote>();
             Cleaners.ValidateHistory(badHistory);
         }
 
@@ -163,7 +163,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Duplicate date found.")]
         public void DuplicateHistory()
         {
-            List<Quote> badHistory = new List<Quote>
+            List<IQuote> badHistory = new List<IQuote>
             {
             new Quote { Date = DateTime.ParseExact("2017-01-03", "yyyy-MM-dd", englishCulture), Open=214.86m, High=220.33m, Low=210.96m, Close=216.99m, Volume = 5923254 },
             new Quote { Date = DateTime.ParseExact("2017-01-04", "yyyy-MM-dd", englishCulture), Open=214.75m, High=228.00m, Low=214.31m, Close=226.99m, Volume = 11213471 },
@@ -180,7 +180,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "No historical basic data.")]
         public void NoBasicData()
         {
-            List<Quote> h = new List<Quote>();
+            List<IQuote> h = new List<IQuote>();
             Cleaners.ConvertHistoryToBasic(h);
         }
 

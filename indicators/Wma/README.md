@@ -35,7 +35,7 @@ The first `N-1` periods will have `null` values since there's not enough data to
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("MSFT");
+IEnumerable<IQuote> history = GetHistoryFromFeed("MSFT");
 
 // calculate 20-period WMA
 IEnumerable<WmaResult> results = Indicator.GetWma(history,20);

@@ -8,20 +8,20 @@ namespace Skender.Stock.Indicators
     {
         // PARABOLIC SAR
         public static IEnumerable<ParabolicSarResult> GetParabolicSar(
-            IEnumerable<Quote> history,
+            IEnumerable<IQuote> history,
             decimal accelerationStep = (decimal)0.02,
             decimal maxAccelerationFactor = (decimal)0.2)
         {
 
             // clean quotes
-            List<Quote> historyList = history.Sort();
+            List<IQuote> historyList = history.Sort();
 
             // check parameters
             ValidateParabolicSar(history, accelerationStep, maxAccelerationFactor);
 
             // initialize
             List<ParabolicSarResult> results = new List<ParabolicSarResult>();
-            Quote first = historyList[0];
+            IQuote first = historyList[0];
 
             decimal accelerationFactor = accelerationStep;
             decimal extremePoint = first.High;
@@ -31,7 +31,7 @@ namespace Skender.Stock.Indicators
             // roll through history
             for (int i = 0; i < historyList.Count; i++)
             {
-                Quote h = historyList[i];
+                IQuote h = historyList[i];
 
                 ParabolicSarResult result = new ParabolicSarResult
                 {
@@ -156,7 +156,7 @@ namespace Skender.Stock.Indicators
         }
 
 
-        private static void ValidateParabolicSar(IEnumerable<Quote> history, decimal accelerationStep, decimal maxAccelerationFactor)
+        private static void ValidateParabolicSar(IEnumerable<IQuote> history, decimal accelerationStep, decimal maxAccelerationFactor)
         {
 
             // check parameters

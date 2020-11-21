@@ -37,7 +37,7 @@ The first period will have `null` values since there's not enough data to calcul
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("MSFT");
+IEnumerable<IQuote> history = GetHistoryFromFeed("MSFT");
 
 // calculate
 IEnumerable<HeikinAshiResult> results = Indicator.GetHeikinAshi(history);

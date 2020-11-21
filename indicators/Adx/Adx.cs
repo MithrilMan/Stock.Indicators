@@ -7,11 +7,11 @@ namespace Skender.Stock.Indicators
     public static partial class Indicator
     {
         // AVERAGE DIRECTIONAL INDEX
-        public static IEnumerable<AdxResult> GetAdx(IEnumerable<Quote> history, int lookbackPeriod = 14)
+        public static IEnumerable<AdxResult> GetAdx(IEnumerable<IQuote> history, int lookbackPeriod = 14)
         {
 
             // clean quotes
-            List<Quote> historyList = history.Sort();
+            List<IQuote> historyList = history.Sort();
 
             // verify parameters
             ValidateAdx(history, lookbackPeriod);
@@ -35,7 +35,7 @@ namespace Skender.Stock.Indicators
             // roll through history
             for (int i = 0; i < historyList.Count; i++)
             {
-                Quote h = historyList[i];
+                IQuote h = historyList[i];
                 int index = i + 1;
 
                 AdxResult result = new AdxResult
@@ -139,7 +139,7 @@ namespace Skender.Stock.Indicators
         }
 
 
-        private static void ValidateAdx(IEnumerable<Quote> history, int lookbackPeriod)
+        private static void ValidateAdx(IEnumerable<IQuote> history, int lookbackPeriod)
         {
             // check parameters
             if (lookbackPeriod <= 1)

@@ -89,7 +89,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Insufficient history.")]
         public void InsufficientHistory()
         {
-            IEnumerable<Quote> h = History.GetHistory(60);
+            IEnumerable<IQuote> h = History.GetHistory(60);
             Indicator.GetMacd(h, 12, 26, 9);
         }
 

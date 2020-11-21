@@ -81,7 +81,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Insufficient history 100.")]
         public void InsufficientHistory100()
         {
-            IEnumerable<Quote> h = History.GetHistory(119);
+            IEnumerable<IQuote> h = History.GetHistory(119);
             Indicator.GetKeltner(h, 20, 2, 10);
         }
 
@@ -89,7 +89,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Insufficient history 250.")]
         public void InsufficientHistory250()
         {
-            IEnumerable<Quote> h = History.GetHistory(499);
+            IEnumerable<IQuote> h = History.GetHistory(499);
             Indicator.GetKeltner(h, 20, 2, 250);
         }
 

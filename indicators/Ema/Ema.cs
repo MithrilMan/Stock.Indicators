@@ -6,7 +6,7 @@ namespace Skender.Stock.Indicators
     public static partial class Indicator
     {
         // EXPONENTIAL MOVING AVERAGE
-        public static IEnumerable<EmaResult> GetEma(IEnumerable<Quote> history, int lookbackPeriod)
+        public static IEnumerable<EmaResult> GetEma(IEnumerable<IQuote> history, int lookbackPeriod)
         {
 
             // convert history to basic format

@@ -45,7 +45,7 @@ Install-Package Skender.Stock.Indicators
 ```csharp
 using Skender.Stock.Indicators;
 
-[..]  // prerequisite: acquire quote history from your own source
+[..]  // prerequisite: acquire IQuote history from your own source
 
 // example: get 20-period simple moving average
 IEnumerable<SmaResult> results = Indicator.GetSma(history,20);

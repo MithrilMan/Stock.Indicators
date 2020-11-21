@@ -43,7 +43,7 @@ We always return the same number of elements as there are in the historical quot
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // calculate
 IEnumerable<AdlResult> results = Indicator.GetAdl(history);

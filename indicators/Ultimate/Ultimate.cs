@@ -8,11 +8,11 @@ namespace Skender.Stock.Indicators
     {
         // ULTIMATE OSCILLATOR
         public static IEnumerable<UltimateResult> GetUltimate(
-            IEnumerable<Quote> history, int shortPeriod = 7, int middlePeriod = 14, int longPeriod = 28)
+            IEnumerable<IQuote> history, int shortPeriod = 7, int middlePeriod = 14, int longPeriod = 28)
         {
 
             // clean quotes
-            List<Quote> historyList = history.Sort();
+            List<IQuote> historyList = history.Sort();
 
             // check parameters
             ValidateUltimate(history, shortPeriod, middlePeriod, longPeriod);
@@ -24,7 +24,7 @@ namespace Skender.Stock.Indicators
             // roll through history
             for (int i = 0; i < historyList.Count; i++)
             {
-                Quote h = historyList[i];
+                IQuote h = historyList[i];
                 int index = i + 1;
 
                 UltimateResult r = new UltimateResult
@@ -88,7 +88,7 @@ namespace Skender.Stock.Indicators
 
 
         private static void ValidateUltimate(
-            IEnumerable<Quote> history, int shortPeriod = 7, int middleAverage = 14, int longPeriod = 28)
+            IEnumerable<IQuote> history, int shortPeriod = 7, int middleAverage = 14, int longPeriod = 28)
         {
 
             // check parameters

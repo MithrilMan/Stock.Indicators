@@ -7,7 +7,7 @@ namespace Skender.Stock.Indicators
     {
         // STANDARD DEVIATION
         public static IEnumerable<StdDevResult> GetStdDev(
-            IEnumerable<Quote> history, int lookbackPeriod, int? smaPeriod = null)
+            IEnumerable<IQuote> history, int lookbackPeriod, int? smaPeriod = null)
         {
 
             // convert to basic data

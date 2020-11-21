@@ -35,7 +35,7 @@ The first `N-(integer of SQRT(N))-1` periods will have `null` values since there
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("MSFT");
+IEnumerable<IQuote> history = GetHistoryFromFeed("MSFT");
 
 // calculate 20-period HMA
 IEnumerable<HmaResult> results = Indicator.GetHma(history,20);

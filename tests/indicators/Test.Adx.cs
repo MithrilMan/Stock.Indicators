@@ -66,7 +66,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Insufficient history.")]
         public void InsufficientHistory()
         {
-            IEnumerable<Quote> h = History.GetHistory(159);
+            IEnumerable<IQuote> h = History.GetHistory(159);
             Indicator.GetAdx(h, 30);
         }
 

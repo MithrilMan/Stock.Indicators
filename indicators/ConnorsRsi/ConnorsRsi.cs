@@ -8,7 +8,7 @@ namespace Skender.Stock.Indicators
     {
         // CONNORS RSI
         public static IEnumerable<ConnorsRsiResult> GetConnorsRsi(
-            IEnumerable<Quote> history, int rsiPeriod = 3, int streakPeriod = 2, int rankPeriod = 100)
+            IEnumerable<IQuote> history, int rsiPeriod = 3, int streakPeriod = 2, int rankPeriod = 100)
         {
 
             // convert history to basic format

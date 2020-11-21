@@ -49,7 +49,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Insufficient history.")]
         public void InsufficientHistory()
         {
-            IEnumerable<Quote> h = History.GetHistory(29);
+            IEnumerable<IQuote> h = History.GetHistory(29);
             Indicator.GetUlcerIndex(h, 30);
         }
 

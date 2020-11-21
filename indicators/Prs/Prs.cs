@@ -8,11 +8,11 @@ namespace Skender.Stock.Indicators
     {
         // PRICE RELATIVE STRENGTH
         public static IEnumerable<PrsResult> GetPrs(
-            IEnumerable<Quote> historyBase, IEnumerable<Quote> historyEval, int? lookbackPeriod = null, int? smaPeriod = null)
+            IEnumerable<IQuote> historyBase, IEnumerable<IQuote> historyEval, int? lookbackPeriod = null, int? smaPeriod = null)
         {
             // clean quotes
-            List<Quote> historyBaseList = historyBase.Sort();
-            List<Quote> historyEvalList = historyEval.Sort();
+            List<IQuote> historyBaseList = historyBase.Sort();
+            List<IQuote> historyEvalList = historyEval.Sort();
 
             // validate parameters
             ValidatePriceRelative(historyBase, historyEval, lookbackPeriod, smaPeriod);
@@ -24,8 +24,8 @@ namespace Skender.Stock.Indicators
             // roll through history for interim data
             for (int i = 0; i < historyEvalList.Count; i++)
             {
-                Quote bi = historyBaseList[i];
-                Quote ei = historyEvalList[i];
+                IQuote bi = historyBaseList[i];
+                IQuote ei = historyEvalList[i];
                 int index = i + 1;
 
                 if (ei.Date != bi.Date)
@@ -43,8 +43,8 @@ namespace Skender.Stock.Indicators
 
                 if (lookbackPeriod != null && index > lookbackPeriod)
                 {
-                    Quote bo = historyBaseList[i - (int)lookbackPeriod];
-                    Quote eo = historyEvalList[i - (int)lookbackPeriod];
+                    IQuote bo = historyBaseList[i - (int)lookbackPeriod];
+                    IQuote eo = historyEvalList[i - (int)lookbackPeriod];
 
                     if (bo.Close != 0 && eo.Close != 0)
                     {
@@ -74,7 +74,7 @@ namespace Skender.Stock.Indicators
 
 
         private static void ValidatePriceRelative(
-            IEnumerable<Quote> historyBase, IEnumerable<Quote> historyEval, int? lookbackPeriod, int? smaPeriod)
+            IEnumerable<IQuote> historyBase, IEnumerable<IQuote> historyEval, int? lookbackPeriod, int? smaPeriod)
         {
 
             // check parameters

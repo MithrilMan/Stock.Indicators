@@ -8,7 +8,7 @@ namespace Skender.Stock.Indicators
     {
         // PRICE MOMENTUM OSCILLATOR (PMO)
         public static IEnumerable<PmoResult> GetPmo(
-            IEnumerable<Quote> history,
+            IEnumerable<IQuote> history,
             int timePeriod = 35,
             int smoothingPeriod = 20,
             int signalPeriod = 10)
@@ -55,7 +55,7 @@ namespace Skender.Stock.Indicators
         }
 
 
-        private static List<PmoResult> CalcPmoRocEma(IEnumerable<Quote> history, int timePeriod)
+        private static List<PmoResult> CalcPmoRocEma(IEnumerable<IQuote> history, int timePeriod)
         {
             // initialize
             decimal smoothingMultiplier = 2m / timePeriod;
@@ -139,7 +139,7 @@ namespace Skender.Stock.Indicators
 
 
         private static void ValidatePmo(
-            IEnumerable<Quote> history,
+            IEnumerable<IQuote> history,
             int timePeriod,
             int smoothingPeriod,
             int signalPeriod)

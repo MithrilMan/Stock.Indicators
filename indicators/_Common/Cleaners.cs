@@ -11,17 +11,17 @@ namespace Skender.Stock.Indicators
     {
         private static readonly CultureInfo nativeCulture = Thread.CurrentThread.CurrentUICulture;
 
-        public static List<Quote> ValidateHistory(IEnumerable<Quote> history)
+        public static List<IQuote> ValidateHistory(IEnumerable<IQuote> history)
         {
             // we cannot rely on date consistency when looking back, so we add an index and sort
 
-            List<Quote> historyList = history.Sort();
+            List<IQuote> historyList = history.Sort();
 
             // check for duplicates
             DateTime lastDate = DateTime.MinValue;
             for (int i = 0; i < historyList.Count; i++)
             {
-                Quote h = historyList[i];
+                IQuote h = historyList[i];
 
                 if (lastDate == h.Date)
                 {
@@ -35,9 +35,9 @@ namespace Skender.Stock.Indicators
             return historyList;
         }
 
-        internal static List<Quote> Sort(this IEnumerable<Quote> history)
+        internal static List<IQuote> Sort(this IEnumerable<IQuote> history)
         {
-            List<Quote> historyList = history.OrderBy(x => x.Date).ToList();
+            List<IQuote> historyList = history.OrderBy(x => x.Date).ToList();
 
             // validate
             if (historyList == null || historyList.Count == 0)
@@ -48,7 +48,7 @@ namespace Skender.Stock.Indicators
             return historyList;
         }
 
-        internal static List<BasicData> ConvertHistoryToBasic(IEnumerable<Quote> history, string element = "C")
+        internal static List<BasicData> ConvertHistoryToBasic(IEnumerable<IQuote> history, string element = "C")
         {
             // elements represents the targeted OHLCV parts, so use "O" to return <Open> as base data, etc.
             // convert to basic data format

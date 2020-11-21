@@ -35,7 +35,7 @@ The first `N` periods will have `null` MFI values since they cannot be calculate
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // calculate
 IEnumerable<MfiResult> results = Indicator.GetMfi(history,14);

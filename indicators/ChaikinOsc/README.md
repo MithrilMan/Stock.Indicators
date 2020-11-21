@@ -41,7 +41,7 @@ The first `S-1` periods will have `null` values for `Oscillator` since there's n
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // calculate 20-period Chaikin Oscillator
 IEnumerable<ChaikinOscResult> results = Indicator.GetChaikinOsc(history,20);

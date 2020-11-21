@@ -9,8 +9,8 @@ namespace Tests.Performance
     [MarkdownExporterAttribute.GitHub]
     public class MarkIndicators
     {
-        private readonly IEnumerable<Quote> hm = History.GetHistory();
-        private readonly IEnumerable<Quote> ho = History.GetHistoryOther();
+        private readonly IEnumerable<IQuote> hm = History.GetHistory();
+        private readonly IEnumerable<IQuote> ho = History.GetHistoryOther();
 
         [Benchmark]
         public object GetAdl()

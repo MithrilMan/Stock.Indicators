@@ -1,6 +1,6 @@
 ﻿# Correlation Coefficient
 
-[Correlation Coefficient](https://en.wikipedia.org/wiki/Correlation_coefficient) between two quote histories, based on Close price.  R-Squared (R&sup2;), Variance, and covariance are also output.
+[Correlation Coefficient](https://en.wikipedia.org/wiki/Correlation_coefficient) between two IQuote histories, based on Close price.  R-Squared (R&sup2;), Variance, and covariance are also output.
 
 ![image](chart.png)
 
@@ -42,8 +42,8 @@ The first `N-1` periods will have `null` values since there's not enough data to
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> historySPX = GetHistoryFromFeed("SPX");
-IEnumerable<Quote> historyTSLA = GetHistoryFromFeed("TSLA");
+IEnumerable<IQuote> historySPX = GetHistoryFromFeed("SPX");
+IEnumerable<IQuote> historyTSLA = GetHistoryFromFeed("TSLA");
 
 // calculate 20-period Correlation
 IEnumerable<CorrResult> results = Indicator.GetCorr(historySPX,historyTSLA,20);

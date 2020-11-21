@@ -52,8 +52,8 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Insufficient history.")]
         public void InsufficientHistory()
         {
-            IEnumerable<Quote> h1 = History.GetHistory(29);
-            IEnumerable<Quote> h2 = History.GetHistoryOther(29);
+            IEnumerable<IQuote> h1 = History.GetHistory(29);
+            IEnumerable<IQuote> h2 = History.GetHistoryOther(29);
             Indicator.GetCorrelation(h1, h2, 30);
         }
 
@@ -61,7 +61,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Not enought Eval history.")]
         public void InsufficientEvalHistory()
         {
-            IEnumerable<Quote> h = History.GetHistory(300);
+            IEnumerable<IQuote> h = History.GetHistory(300);
             Indicator.GetCorrelation(history, h, 30);
         }
 
@@ -69,7 +69,7 @@ namespace Internal.Tests
         [ExpectedException(typeof(BadHistoryException), "Mismatch history.")]
         public void GetCorrelationMismatchTest()
         {
-            IEnumerable<Quote> historyMismatch = History.GetHistoryWithMismatchDates();
+            IEnumerable<IQuote> historyMismatch = History.GetHistoryWithMismatchDates();
             Indicator.GetCorrelation(historyMismatch, historyOther, 20);
         }
 

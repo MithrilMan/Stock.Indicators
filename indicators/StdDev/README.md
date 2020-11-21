@@ -41,7 +41,7 @@ The first `N-1` periods will have `null` values since there's not enough data to
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPX");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPX");
 
 // calculate 10-period Standard Deviation
 IEnumerable<StdDevResult> results = Indicator.GetStdDev(history,10);

@@ -38,7 +38,7 @@ The first `N+S-1` periods will have `null` Oscillator values since there's not e
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // calculate STO %K(14),%D(3) (slow)
 IEnumerable<StochResult> results = Indicator.GetStoch(history,14,3,3);

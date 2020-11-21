@@ -42,7 +42,7 @@ The first `R+S-1` periods will have `null` values for `StochRsi` since there's n
 
 ```csharp
 // fetch historical quotes from your favorite feed, in Quote format
-IEnumerable<Quote> history = GetHistoryFromFeed("SPY");
+IEnumerable<IQuote> history = GetHistoryFromFeed("SPY");
 
 // calculate StochRSI(14)
 IEnumerable<StochRsiResult> results = Indicator.GetStochRsi(history,14,14,1,1);

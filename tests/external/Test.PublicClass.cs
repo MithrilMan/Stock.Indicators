@@ -27,7 +27,7 @@ namespace External.Tests
         [TestMethod()]
         public void CleanHistory()
         {
-            IEnumerable<Quote> history = History.GetHistory();
+            IEnumerable<IQuote> history = History.GetHistory();
             history = Cleaners.ValidateHistory(history);
 
             Indicator.GetSma(history, 5);
@@ -36,10 +36,10 @@ namespace External.Tests
         [TestMethod()]
         public void ReadQuoteClass()
         {
-            IEnumerable<Quote> history = History.GetHistory();
-            List<Quote> h = Cleaners.ValidateHistory(history);
+            IEnumerable<IQuote> history = History.GetHistory();
+            List<IQuote> h = Cleaners.ValidateHistory(history);
 
-            Quote f = h.FirstOrDefault();
+            IQuote f = h.FirstOrDefault();
             Console.WriteLine("Date:{0},Close:{1}", f.Date, f.Close);
         }
 
@@ -59,7 +59,7 @@ namespace External.Tests
         [TestMethod()]
         public void DerivedQuoteClassLinq()
         {
-            IEnumerable<Quote> history = History.GetHistory();
+            IEnumerable<IQuote> history = History.GetHistory();
             history = Cleaners.ValidateHistory(history);
 
             // can use a derive Quote class using Linq
@@ -92,7 +92,7 @@ namespace External.Tests
         [TestMethod()]
         public void DerivedIndicatorClassLinq()
         {
-            IEnumerable<Quote> history = History.GetHistory();
+            IEnumerable<IQuote> history = History.GetHistory();
             IEnumerable<EmaResult> emaResults = Indicator.GetEma(history, 14);
 
             // can use a derive Indicator class using Linq

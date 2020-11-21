@@ -7,17 +7,17 @@ namespace Skender.Stock.Indicators
     public static partial class Indicator
     {
         // HULL MOVING AVERAGE
-        public static IEnumerable<HmaResult> GetHma(IEnumerable<Quote> history, int lookbackPeriod)
+        public static IEnumerable<HmaResult> GetHma(IEnumerable<IQuote> history, int lookbackPeriod)
         {
 
             // clean quotes
-            List<Quote> historyList = history.Sort();
+            List<IQuote> historyList = history.Sort();
 
             // check parameters
             ValidateHma(history, lookbackPeriod);
 
             // initialize
-            List<Quote> synthHistory = new List<Quote>();
+            List<IQuote> synthHistory = new List<IQuote>();
 
             List<WmaResult> wmaN1 = GetWma(history, lookbackPeriod).ToList();
             List<WmaResult> wmaN2 = GetWma(history, lookbackPeriod / 2).ToList();
@@ -26,9 +26,9 @@ namespace Skender.Stock.Indicators
             // roll through history
             for (int i = 0; i < historyList.Count; i++)
             {
-                Quote h = historyList[i];
+                IQuote h = historyList[i];
 
-                Quote sh = new Quote
+                IQuote sh = new Quote
                 {
                     Date = h.Date
                 };
@@ -72,7 +72,7 @@ namespace Skender.Stock.Indicators
         }
 
 
-        private static void ValidateHma(IEnumerable<Quote> history, int lookbackPeriod)
+        private static void ValidateHma(IEnumerable<IQuote> history, int lookbackPeriod)
         {
 
             // check parameters
